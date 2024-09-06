@@ -1,0 +1,121 @@
+package prajwalApp;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
+
+public class SocialMediaFrame extends JFrame {
+
+    private JTextArea apiResponseArea;
+
+    public SocialMediaFrame() {
+        // Set the title of the frame
+        setTitle("MediaJam");
+
+        // Set the layout manager to BorderLayout for proper positioning
+        setLayout(new BorderLayout());
+
+        // Create a panel for the grid icons
+        JPanel iconPanel = new JPanel();
+        iconPanel.setLayout(new GridLayout(4, 3, 0, 0)); // 4 rows, 3 columns, no gap between components
+
+        // Load and resize the logos to 150x150
+        ImageIcon youtubeIcon = new ImageIcon(new ImageIcon("youtube.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon facebookIcon = new ImageIcon(new ImageIcon("facebook.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+
+        // Create labels with the icons
+        JLabel youtubeLabel = new JLabel(youtubeIcon);
+        JLabel facebookLabel = new JLabel(facebookIcon);
+
+        // Add the labels to the iconPanel
+        iconPanel.add(youtubeLabel);
+        iconPanel.add(facebookLabel);
+
+        // Add iconPanel to the center of the frame
+        add(iconPanel, BorderLayout.CENTER);
+
+        // Add JTextArea to display API response
+        apiResponseArea = new JTextArea();
+        apiResponseArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(apiResponseArea);
+        add(scrollPane, BorderLayout.SOUTH);
+
+        // Add mouse click listeners to open websites and call APIs
+        youtubeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.youtube.com");
+                callApi("https://jsonplaceholder.typicode.com/posts/1");  // Sample API call
+            }
+        });
+
+        facebookLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.facebook.com");
+            }
+        });
+
+        // Set the default close operation
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set the size of the frame to fit the grid and copyright label
+        setSize(500, 700);
+
+        // Center the frame on the screen
+        setLocationRelativeTo(null);
+
+        // Make the frame visible
+        setVisible(true);
+    }
+
+    // Method to open a website in the default browser
+    private void openWebsite(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to call an API and display the result
+    private void callApi(String apiUrl) {
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Update JTextArea with the response
+                apiResponseArea.setText(response.toString());
+            } else {
+                apiResponseArea.setText("Failed to call API: " + responseCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            apiResponseArea.setText("Error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        // Run the application
+        SwingUtilities.invokeLater(SocialMediaFrame::new);
+    }
+}

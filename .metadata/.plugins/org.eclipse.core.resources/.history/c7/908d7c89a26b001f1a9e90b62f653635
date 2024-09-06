@@ -1,0 +1,116 @@
+package prajwalApp;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+
+public class SocialMediaFrame extends JFrame {
+
+    public SocialMediaFrame() {
+        // Set the title of the frame
+        setTitle("MediaJam");
+
+        // Set the layout manager to BorderLayout for proper positioning
+        setLayout(new BorderLayout());
+
+        // Create a panel for the social media icons
+        JPanel iconPanel = new JPanel();
+        iconPanel.setLayout(new GridLayout(1, 5, 0, 0)); // Single row, 5 columns, no gaps
+
+        // Load and resize the logos to fill the grid cell completely (adjust size as per need)
+        ImageIcon facebookIcon = new ImageIcon(new ImageIcon("facebook.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon instaIcon = new ImageIcon(new ImageIcon("instagram.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon whatsappIcon = new ImageIcon(new ImageIcon("whatsapp.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon telegramIcon = new ImageIcon(new ImageIcon("telegram.jpeg").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        ImageIcon messengerIcon = new ImageIcon(new ImageIcon("messenger.png").getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+
+        // Create labels with the icons
+        JLabel facebookLabel = new JLabel(facebookIcon);
+        JLabel instaLabel = new JLabel(instaIcon);
+        JLabel whatsappLabel = new JLabel(whatsappIcon);
+        JLabel telegramLabel = new JLabel(telegramIcon);
+        JLabel messengerLabel = new JLabel(messengerIcon);
+
+        // Add mouse click listeners to open websites
+        facebookLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.facebook.com");
+            }
+        });
+
+        instaLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.instagram.com");
+            }
+        });
+
+        whatsappLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.whatsapp.com");
+            }
+        });
+
+        telegramLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.telegram.com");
+            }
+        });
+
+        messengerLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.messenger.com");
+            }
+        });
+
+        // Add the labels to the iconPanel (in a single row, continuously)
+        iconPanel.add(facebookLabel);
+        iconPanel.add(instaLabel);
+        iconPanel.add(whatsappLabel);
+        iconPanel.add(telegramLabel);
+        iconPanel.add(messengerLabel);
+
+        // Add iconPanel to the center of the frame
+        add(iconPanel, BorderLayout.CENTER);
+
+        // Create a label for the copyright notice
+        JLabel copyrightLabel = new JLabel("© Prazzol Pokhrel", JLabel.CENTER);
+        copyrightLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+        copyrightLabel.setForeground(Color.GRAY);
+
+        // Add the copyright label to the bottom of the frame
+        add(copyrightLabel, BorderLayout.SOUTH);
+
+        // Set the default close operation
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set the size of the frame
+        setSize(800, 300); // Adjusted size to fit the row of icons
+
+        // Center the frame on the screen
+        setLocationRelativeTo(null);
+
+        // Make the frame visible
+        setVisible(true);
+    }
+
+    // Method to open a website in the default browser
+    private void openWebsite(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Run the application
+        SwingUtilities.invokeLater(SocialMediaFrame::new);
+    }
+}

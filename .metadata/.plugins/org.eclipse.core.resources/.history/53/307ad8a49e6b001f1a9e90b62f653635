@@ -1,0 +1,236 @@
+package prajwalApp;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URI;
+
+public class SocialMediaFrame extends JFrame {
+
+    public SocialMediaFrame() {
+        // Set the title of the frame
+        setTitle("MediaJam");
+
+        // Set the layout manager to arrange components
+        setLayout(new FlowLayout());
+
+        // Load the YouTube and Facebook logos
+        ImageIcon youtubeIcon = new ImageIcon("youtube.png");
+        ImageIcon facebookIcon = new ImageIcon("facebook.png");
+        ImageIcon instaIcon = new ImageIcon("insta.png");
+       
+        ImageIcon snapchatIcon = new ImageIcon("snapchat.png");
+        ImageIcon telegramIcon = new ImageIcon("telegram.png");
+        ImageIcon whatsappIcon = new ImageIcon("whatsapp.png");
+        ImageIcon linkedinIcon = new ImageIcon("linkedin.png");
+        ImageIcon messengerIcon = new ImageIcon("messanger.png");
+        ImageIcon tiwterIcon = new ImageIcon("tiwtter.png");
+        ImageIcon discordIcon = new ImageIcon("discord.png");
+        ImageIcon quoraIcon = new ImageIcon("quora.jpeg");
+        ImageIcon threadsIcon = new ImageIcon("threads.avif");
+        ImageIcon githubIcon = new ImageIcon("github.png");
+       
+       
+
+        // Create labels with the icons
+        JLabel youtubeLabel = new JLabel(youtubeIcon);
+        
+        JLabel facebookLabel = new JLabel(facebookIcon);
+        
+        JLabel instaLabel = new JLabel(instaIcon);
+        
+        
+        JLabel snapLabel = new JLabel(snapchatIcon);
+        
+        JLabel telegramLabel = new JLabel(telegramIcon);
+        
+        JLabel whatsappLabel = new JLabel(whatsappIcon);
+        
+        JLabel linkedinLabel = new JLabel(linkedinIcon);
+        
+        JLabel messengerLabel = new JLabel(messengerIcon);
+        
+        JLabel twitterLabel = new JLabel(tiwterIcon);
+        
+        JLabel discordLabel = new JLabel(discordIcon);
+        
+        JLabel quoraLabel = new JLabel(quoraIcon);
+        
+        JLabel threadsLabel = new JLabel(threadsIcon);
+        
+        JLabel githubLabel = new JLabel(githubIcon);
+        
+        
+        
+
+        // Add a mouse click listener to open YouTube
+        youtubeLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.youtube.com");
+            }
+        });
+
+        // Add a mouse click listener to open Facebook
+        facebookLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.facebook.com");
+            }
+        });
+        
+     // Add a mouse click listener to open instagram
+        instaLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.instagram.com");
+            }
+        });
+        
+     // Add a mouse click listener to open Snapchat
+        snapLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.snapchat.com");
+            }
+        });
+
+     // Add a mouse click listener to open Telegram
+        telegramLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.telegram.com");
+            }
+        });
+        
+     // Add a mouse click listener to open Whatsapp
+        whatsappLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.whatsapp.com");
+            }
+        });
+        
+     // Add a mouse click listener to open LinkedIn
+        linkedinLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.LinkedIn.com");
+            }
+        });
+        
+        
+     // Add a mouse click listener to open Messenger
+        messengerLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.messenger.com");
+            }
+        });
+        
+     // Add a mouse click listener to open Twitter
+        twitterLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.tiwiter.com");
+            }
+        });
+        
+        
+     // Add a mouse click listener to open Discord
+        discordLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.discord.com");
+            }
+        });
+        
+     // Add a mouse click listener to open Quora
+        quoraLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.quora.com");
+            }
+        });
+        
+        
+        // Add a mouse click listener to open Threads
+        threadsLabel .addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.threads.com");
+            }
+        });
+        
+        
+        // Add a mouse click listener to open Github
+        githubLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openWebsite("https://www.github.com");
+            }
+        });
+        
+        
+        
+       
+        
+        // Add the labels to the frame
+        add(youtubeLabel);
+        
+        add(facebookLabel);
+        
+        add(instaLabel);
+        
+        add(threadsLabel);
+        
+        add(whatsappLabel);
+        
+        add(twitterLabel);
+        
+        add(telegramLabel);
+        
+        add(messengerLabel);
+        
+        add(discordLabel);
+        
+        add(linkedinLabel);
+
+        add(githubLabel);
+        
+
+        add(quoraLabel);
+        
+       
+        
+
+
+        // Set the default close operation
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set the size of the frame
+        setSize(300, 200);
+
+        // Center the frame on the screen
+        setLocationRelativeTo(null);
+
+        // Make the frame visible
+        setVisible(true);
+    }
+
+    // Method to open a website in the default browser
+    private void openWebsite(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        // Run the application
+        SwingUtilities.invokeLater(SocialMediaFrame::new);
+    }
+}
+
